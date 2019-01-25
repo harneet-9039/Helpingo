@@ -1,3 +1,41 @@
 <resources>
     <string name="app_name">HelpingO</string>
+        <string name="App_Name">Dot7</string>
+        <string name="Automatically_Detect_Otp_Text">Waiting to automatically detect OTP sent to your entered mobile number.</string>
+        <string name="Title_Activity_Check_Connection">CheckConnection</string>
+        <string name="Welcome_Screen_Text">Ready to order from top restaurants?</string>
+        <string name="Cart">Add to Cart</string>
+        <string name="Call">Call to Order</string>
+        <string name="Already_Have_An_Account">Have an account? Login</string>
+        <string name="Sign_Up">Sign Up</string>
+        <string name="Enter_Email_Id">Enter your Email-id</string>
+        <string name="Mobile_Hint">Mobile Number</string>
+        <string name="Hint_Name1">User Name</string>
+        <string name="Password_Hint">Password</string>
+        <string name="Confirm_Password_Hint">Confirm Password</string>
+        <string name="Full_Name_Hint">Full Name</string>
+        <string name="Email_Id_Hint">Email ID</string>
+        <string name="Login_Button">Login</string>
+        <string name="Signup_Link">No Account Yet? Create one</string>
+        <string name="Signup_Button">Create Account</string>
+        <string name="Login_Link">Already a member? Login</string>
+        <string name="Forgot_Password">Forgot Password?</string>
+        <string name="sendotp_key">203102Ap0zafxYzG5aaaa3a9</string>
+        <string name="Verify">Verify</string>
+        <string name="New_Password">Enter New Password</string>
+        <string name="New_Confirm">Confirm New Password</string>
+        <string name="title_activity_temp">TempActivity</string>
+        <string name="facebook_app_id">238145213423769</string>
+        <string name="Continue_Button">Continue</string>
+        <string name="Forgot_Password_Description">We just need your registered mobile number to help you to reset your password.</string>
+        <string name="Or">OR</string>
+        <string name="Update_Password">Update Password</string>
+        <string name="Google_Sign_Up">Sign up from Google</string>
+        <string name="action_settings">Action Settings</string>
+        <string name="DOT7_Banner">DOT7 Banner</string>
+        <string name="search_label">Search Restaurants</string>
+        <string name="search_hint">Search 9280</string>
+        <string name="about_us">Team DOT 7</string>
+        <string name="Tushar_Garg">Tushar Garg</string>
+
 </resources>

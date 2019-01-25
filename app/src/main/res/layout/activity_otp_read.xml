@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="464dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="#FFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/TextView_Otp_Message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="124dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:text="@string/Automatically_Detect_Otp_Text"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <com.alimuzaffar.lib.pin.PinEntryEditText
+            android:id="@+id/Txt_Pin_Entry"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/TextView_Otp_Message"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="30dp"
+            android:cursorVisible="false"
+            android:digits="1234567890"
+            android:inputType="number"
+            android:maxLength="4"
+            android:textIsSelectable="false"
+            android:textSize="20sp"
+            app:pinAnimationType="popIn" />
+
+
+
+        <ProgressBar
+            android:id="@+id/OTP_Progress_Bar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_below="@+id/Verify_Otp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/Verify_Otp"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Txt_Pin_Entry"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="44dp"
+            android:background="@color/colorPrimaryDark"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="11dp"
+            android:padding="12dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Button"
+                android:text="@string/Continue_Button"
+                android:textColor="#FFF"/>
+
+            <ProgressBar
+                android:id="@+id/OTPVerify_Progress_Bar"
+                android:layout_width="26dp"
+                android:layout_height="21dp"
+                android:layout_gravity="center"
+                android:indeterminate="true"
+                android:visibility="gone" />
+
+            >
+
+        </LinearLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/ImageView2"
+        android:layout_width="244dp"
+        android:layout_height="140dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="412dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+         />
+</android.support.constraint.ConstraintLayout>
