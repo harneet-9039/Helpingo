@@ -34,6 +34,7 @@
         <string name="Update_Password">Update Password</string>
         <string name="google_places_key">AIzaSyAUNObohVtbxseKCD5P0rZ9qfiqQPG5Uus</string>
         <string name="action_settings">Action Settings</string>
+
     <string name="latitude_label">Latitude</string>
     <string name="longitude_label">Longitude</string>
 

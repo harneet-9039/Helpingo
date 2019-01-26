@@ -11,7 +11,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -39,6 +41,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Location lastLocation;
     private Marker currentMarker;
     private static final int Request_User_Location_Code=99;
+    private double latitude,longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,17 +61,44 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public void find(View v)
     {
-        StringBuilder stringBuilder = new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
-        stringBuilder.append("&radius="+1000);
-        stringBuilder.append("%keywords="+"hospital");
-        stringBuilder.append("&key="+getResources().getString(R.string.google_places_key));
-        String url=stringBuilder.toString();
-        Object dataTransfer[]=new Object[2];
-        dataTransfer[0]=mMap;
-        dataTransfer[1]=url;
+        Object transferData[]=new Object[2];
+        GetNearByPlaces getNearByPlaces=new GetNearByPlaces();
+        switch(v.getId())
+        {
+            /*case R.id.button2:{
+                //mMap.clear();
+                String url=getUrl(latitude,longitude,"hospital");
+                transferData[0]=mMap;
+                transferData[1]=url;
+                getNearByPlaces.execute(transferData);
+                Toast.makeText(this, "Searching Hospitals..",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Showing Hospitals..",Toast.LENGTH_SHORT).show();
+                break;}*/
 
-       // GetNearByPlaces getNearByPlaces = new GetNearByPlaces(this);
-        //getNearByPlaces.execute(dataTransfer);
+            case R.id.button5:
+                mMap.clear();
+                String url=getUrl(latitude,longitude,"restaurant");
+                transferData[0]=mMap;
+                transferData[1]=url;
+                getNearByPlaces.execute(transferData);
+                Toast.makeText(this, "Searching Restaurants..",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Showing Restaurants..",Toast.LENGTH_SHORT).show();
+                break;
+
+        }
+    }
+
+    private String getUrl(double latitude, double longitude, String nearbyPlace)
+    {
+        StringBuilder googlUrl=new StringBuilder("https://maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        googlUrl.append("location="+latitude+","+longitude);
+        googlUrl.append("&radius="+10000);
+        googlUrl.append("&type="+nearbyPlace);
+        googlUrl.append("&sensor=true");
+        googlUrl.append("&key=AIzaSyAUNObohVtbxseKCD5P0rZ9qfiqQPG5Uus");
+
+        Log.d("GoogleMapsActivity","url = "+googlUrl.toString());
+        return googlUrl.toString();
     }
 
 
@@ -139,29 +169,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         googleApiClient=new GoogleApiClient.Builder(this ).addConnectionCallbacks(this).addOnConnectionFailedListener(this).addApi(LocationServices.API).build();
         googleApiClient.connect();
     }
-
     @Override
     public void onLocationChanged(Location location) {
-    lastLocation = location;
-    if(currentMarker != null )
-        currentMarker.remove();
-    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
+        latitude=location.getLatitude();
+        longitude=location.getLongitude();
+        lastLocation = location;
+        if(currentMarker != null )
+            currentMarker.remove();
 
-
-
-
-    MarkerOptions markerOptions = new MarkerOptions();
-    markerOptions.position(latLng);
-    markerOptions.title("You're Here!");
-    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
-    currentMarker=mMap.addMarker(markerOptions);
-    mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-    mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
-    if(googleApiClient!=null)
-    {
-        LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,this);
-    }
+        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions.position(latLng);
+        markerOptions.title("You're Here!");
+        markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+        currentMarker=mMap.addMarker(markerOptions);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        mMap.animateCamera(CameraUpdateFactory.zoomBy(14));
+        if(googleApiClient!=null)
+        {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient,this);
+        }
 
     }
 
