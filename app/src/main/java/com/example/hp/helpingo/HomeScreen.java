@@ -1,6 +1,7 @@
 package com.example.hp.helpingo;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -22,20 +23,37 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+
+import common.GlobalMethods;
+import common.MyDialog;
+import common.OTP_Generator;
+import common.OTP_Reader;
+import common.singleton;
 
 public class HomeScreen extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     private Spinner spinner, spinner_new;
     private static final String TAG = SpotHelp.class.getSimpleName();
@@ -52,7 +70,9 @@ public class HomeScreen extends AppCompatActivity
     private static final double midx = 25.4214905;
     private static final double midy = 81.888261;
     private int flag=0;
-
+    private ProgressDialog progressBar;
+    private EditText mob;
+    MyDialog dialog;
     /**
      * Provides the entry point to the Fused Location Provider API.
      */
@@ -63,17 +83,14 @@ public class HomeScreen extends AppCompatActivity
      */
     protected Location mLastLocation;
 
-    private String mLatitudeLabel;
-    private String mLongitudeLabel;
-    private TextView mLatitudeText;
-    private TextView mLongitudeText;
+   private Button b;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.setTitle("HelpingO");
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -85,6 +102,10 @@ public class HomeScreen extends AppCompatActivity
          spinner = (Spinner) findViewById(R.id.spinner);
          spinner_new = (Spinner) findViewById(R.id.spinner2);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        b = findViewById(R.id.button);
+        progressBar = new ProgressDialog(this);
+        b.setOnClickListener(this);
+        mob = findViewById(R.id.Mob_No);
         IniailizeSpinner();
     }
 
@@ -154,10 +175,10 @@ public class HomeScreen extends AppCompatActivity
         categories.add("Management Problem");
 
         List<String> Severity = new ArrayList<String>();
-        categories.add("Normal");
-        categories.add("Intermediate");
-        categories.add("Crucial");
-        categories.add("Extreme Priority Issue");
+        Severity.add("Normal");
+        Severity.add("Intermediate");
+        Severity.add("Crucial");
+        Severity.add("Extreme Priority Issue");
 
         // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, categories);
@@ -374,6 +395,69 @@ public class HomeScreen extends AppCompatActivity
                             }
                         });
             }
+        }
+    }
+    int t=0;
+    @Override
+    public void onClick(View view) {
+
+        /*if(flag==0) {
+            showSnackbar("You are not in range of the gathering");
+            return;
+        }*/
+
+        progressBar.show();
+        Log.d("HAR",mob.getText().toString()+String.valueOf(flag)+spinner.getSelectedItem()+spinner_new.getSelectedItem());
+        String url = GlobalMethods.getURL() + "public_gathering.php";
+        try {
+            StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
+                    Listener<String>() {
+
+                @Override
+                public void onResponse(String s) {
+                   progressBar.dismiss();
+                   Log.d("HAR",s);
+                   dialog = new MyDialog(HomeScreen.this, "Thank You for your valuable feedback","OK");
+                 /*  if(s.contains("1")) {
+                       t=1;
+                   }
+                   else
+                   {
+                       showSnackbar("Sorry, the notification for this event is already being posted");
+                   }*/
+
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    // setProgressBarIndeterminate(false);
+                    progressBar.dismiss();
+                    //progressBar.setActivated(false);
+                    Log.d("HAR", volleyError.toString());
+                    Log.d("HAR", "Error");
+                    //***************************************Stop Progress Bar********************************
+
+
+
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> parameters = new HashMap<>();
+                    parameters.put("mobile", mob.getText().toString());
+                    parameters.put("region", "S"+String.valueOf(flag));
+                    parameters.put("situation_type", spinner.getSelectedItem().toString());
+                    parameters.put("types_of_problem", spinner_new.getSelectedItem().toString());
+                    return parameters;
+                }
+            };
+            singleton.getInstance(this).addToRequestQueue(request);
+
+
+        } catch (Exception ex) {
+
         }
     }
 }
