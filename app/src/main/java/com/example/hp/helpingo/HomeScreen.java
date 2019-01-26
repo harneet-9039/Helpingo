@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +23,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -89,8 +91,9 @@ public class HomeScreen extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         toolbar.setTitle("HelpingO");
+        setSupportActionBar(toolbar);
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -168,6 +171,7 @@ public class HomeScreen extends AppCompatActivity
     private void IniailizeSpinner()
     {
         List<String> categories = new ArrayList<String>();
+        categories.add(0,"---select one---");
         categories.add("Fire");
         categories.add("Excessive Crowd Rush");
         categories.add("Fight");
@@ -175,6 +179,7 @@ public class HomeScreen extends AppCompatActivity
         categories.add("Management Problem");
 
         List<String> Severity = new ArrayList<String>();
+        Severity.add(0,"---select one---");
         Severity.add("Normal");
         Severity.add("Intermediate");
         Severity.add("Crucial");
@@ -191,6 +196,17 @@ public class HomeScreen extends AppCompatActivity
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
         spinner_new.setAdapter(dataAdapter_new);
+
+        spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+        public void onItemSelected(AdapterView<?> parent, View view, int pos,
+                                   long id) {
+            ((TextView) view).setTextColor(Color.RED);
+        }
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+
+    });
+
     }
 
 
