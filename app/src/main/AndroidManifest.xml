@@ -47,8 +47,6 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".SpotHelp"
             android:screenOrientation="portrait"/>
-        <activity android:name=".AddressListActivity"
-            android:screenOrientation="portrait"/>
         <activity
             android:name=".Set_New_Password"
             android:theme="@style/LoginTheme"
