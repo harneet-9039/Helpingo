@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.hp.helpingo.ChoiceActivity;
+import com.example.hp.helpingo.HomeScreen;
 import com.example.hp.helpingo.R;
 import com.example.hp.helpingo.Set_New_Password;
 
@@ -109,7 +110,8 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
             Flag = true;
             //calling webservice to register user
             verifyProgressBar.setVisibility(View.VISIBLE);
-            callService();
+            startActivity(new Intent(OTP_Reader.this, HomeScreen.class));
+
 
         }
         else
@@ -118,11 +120,11 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
         }
 
     }
-    private void callService()
+    /*private void callService()
     {
         Log.d("HAR",Name);
-        Log.d("HAR",Email);
-        Log.d("HAR",Password);
+        //Log.d("HAR",Email);
+        //Log.d("HAR",Password);
         try {
             StringRequest request = new StringRequest(Request.Method.POST, url, new Response.
                     Listener<String>() {
@@ -170,5 +172,5 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
         {
             //return false;
         }
-    }
+    }*/
 }

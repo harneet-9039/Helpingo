@@ -199,7 +199,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                         startActivity(intent);
                     } else {
 
-
+                        startActivity(new Intent(Register.this, HomeScreen.class));
 
 
                     }

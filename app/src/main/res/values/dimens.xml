@@ -6,4 +6,5 @@
 
     <dimen name="lat_long_text_size">16sp</dimen>
     <dimen name="text_margin">24dp</dimen>
+
 </resources>

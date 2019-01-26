@@ -62,7 +62,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public void find(View v)
     {
         Object transferData[]=new Object[2];
-        GetNearByPlaces getNearByPlaces=new GetNearByPlaces();
+        //GetNearByPlaces getNearByPlaces=new GetNearByPlaces();
         switch(v.getId())
         {
             /*case R.id.button2:{
@@ -80,7 +80,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 String url=getUrl(latitude,longitude,"restaurant");
                 transferData[0]=mMap;
                 transferData[1]=url;
-                getNearByPlaces.execute(transferData);
+               // getNearByPlaces.execute(transferData);
                 Toast.makeText(this, "Searching Restaurants..",Toast.LENGTH_SHORT).show();
                 Toast.makeText(this, "Showing Restaurants..",Toast.LENGTH_SHORT).show();
                 break;
