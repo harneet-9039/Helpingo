@@ -30,12 +30,18 @@
         <string name="Forgot_Password_Description">We just need your registered mobile number to help you to reset your password.</string>
         <string name="Or">OR</string>
         <string name="Update_Password">Update Password</string>
-        <string name="Google_Sign_Up">Sign up from Google</string>
+
         <string name="action_settings">Action Settings</string>
-        <string name="DOT7_Banner">DOT7 Banner</string>
-        <string name="search_label">Search Restaurants</string>
-        <string name="search_hint">Search 9280</string>
-        <string name="about_us">Team DOT 7</string>
-        <string name="Tushar_Garg">Tushar Garg</string>
+    <string name="latitude_label">Latitude</string>
+    <string name="longitude_label">Longitude</string>
+
+    <string name="no_location_detected">
+        No location detected. Make sure location is enabled on the device.
+    </string>
+
+    <string name="permission_rationale">Location permission is needed for core functionality</string>
+    <string name="permission_denied_explanation">Permission was denied, but is needed for core
+        functionality.</string>
+    <string name="settings">Settings</string>
 
 </resources>

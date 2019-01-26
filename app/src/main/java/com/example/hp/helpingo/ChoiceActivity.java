@@ -138,17 +138,9 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 public void onResponse(String response) {
 
-                        /*JSONObject jsonObject=new JSONObject(response);
-                        if(jsonObject.getInt("success")==1){
-                            JSONArray jsonArray=jsonObject.getJSONArray("Name");
-                            for(int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String country=jsonObject1.getString("Country");
-                                CountryName.add(country);
-                            }*/
-                    Log.d("HAR", response);
 
-                    // s1.setAdapter(new ArrayAdapter<String>(ChoiceActivity.this, android.R.layout.simple_spinner_dropdown_item, CountryName));
+
+                    Log.d("HAR", response);
                 }
             }, new Response.ErrorListener() {
                 @Override
