@@ -15,7 +15,7 @@
         <meta-data
             android:name="sendotp.key"
             android:value="@string/sendotp_key" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".ChoiceActivity">
         </activity>
         <receiver android:name="common.SMSReciever">
             <intent-filter>

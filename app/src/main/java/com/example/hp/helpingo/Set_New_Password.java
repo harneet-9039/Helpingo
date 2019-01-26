@@ -2,11 +2,9 @@ package com.example.hp.helpingo;
 
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import android.support.v7.widget.AppCompatButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -129,7 +127,7 @@ public class Set_New_Password extends AppCompatActivity implements View.OnClickL
 
 
                     if (StatusCode.contains("202")) {
-                        startActivity(new Intent(Set_New_Password.this, MainActivity.class));
+                        startActivity(new Intent(Set_New_Password.this, ChoiceActivity.class));
                     }
                     else {
                         Log.d("HAR","NOT Verified new password");

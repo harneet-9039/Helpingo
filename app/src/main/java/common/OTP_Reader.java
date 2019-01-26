@@ -17,16 +17,13 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.example.hp.helpingo.MainActivity;
+import com.example.hp.helpingo.ChoiceActivity;
 import com.example.hp.helpingo.R;
 import com.example.hp.helpingo.Set_New_Password;
 
 
 import java.util.HashMap;
 import java.util.Map;
-import common.Permissions;
-
-
 
 
 public class OTP_Reader extends AppCompatActivity implements View.OnClickListener{
@@ -144,7 +141,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                         editor.commit();
 
                         Log.d("HAR", "Local file created");
-                        startActivity(new Intent(OTP_Reader.this, MainActivity.class));
+                        startActivity(new Intent(OTP_Reader.this, ChoiceActivity.class));
                     }
                     else{
 
