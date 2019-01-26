@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,6 +35,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
     private Spinner s1, s2;
     private Button b;
     private ProgressDialog Progress;
+     ArrayList<String> Name, TempArr;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,6 +47,8 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
         b.setOnClickListener(this);
         s1.setOnItemSelectedListener(this);
         s2.setOnItemSelectedListener(this);
+        Name=new ArrayList<>();
+        TempArr = new ArrayList<>();
         Progress.show();
         FillCity();
     }
@@ -59,22 +63,22 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
 
     private void FillCity()
     {
+
+
         try {
 
             StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
 
-                        /*JSONObject jsonObject=new JSONObject(response);
-                        if(jsonObject.getInt("success")==1){
-                            JSONArray jsonArray=jsonObject.getJSONArray("Name");
-                            for(int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String country=jsonObject1.getString("Country");
-                                CountryName.add(country);
-                            }*/
                     Log.d("HAR", response);
-                    Progress.dismiss();
+                    String[] temp = response.split(",");
+                    for(int i=0;i<temp.length;i++) {
+                        Name.add(temp[i]);
+                        Log.d("HAR", temp[i].toString());
+                    }
+                        s1.setAdapter(new ArrayAdapter<String>(ChoiceActivity.this, android.R.layout.simple_spinner_dropdown_item, Name));
+                        Progress.dismiss();
 
                     // s1.setAdapter(new ArrayAdapter<String>(ChoiceActivity.this, android.R.layout.simple_spinner_dropdown_item, CountryName));
                 }
@@ -83,12 +87,14 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
                 public void onErrorResponse(VolleyError error) {
                     error.printStackTrace();
                     Log.d("HAR", error.toString());
+                    Progress.dismiss();
+
                 }
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("value", "1");
+                    parameters.put("value", "true");
                     return parameters;
                 }
             };
@@ -97,6 +103,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
 
 
         } catch (Exception ex) {
+            Log.d("HAR", ex.toString());
             Progress.dismiss();
 
             Log.d("HAR", "Catch Error");
@@ -107,13 +114,14 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         if(adapterView.getId() == R.id.spinner) {
+            Progress.show();
             String City = (String) adapterView.getItemAtPosition(i);
             getEvents(City);
         }
         else if(adapterView.getId() == R.id.spinner2)
         {
-            String Event = (String) adapterView.getItemAtPosition(i);
-            getPinCode(Event);
+            String Event1 = (String) adapterView.getItemAtPosition(i);
+            getPinCode(Event1);
         }
     }
 
@@ -122,7 +130,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void getPinCode(final String Event)
+    private void getPinCode(final String Event1)
     {
         try {
 
@@ -152,8 +160,8 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("value", "3");
-                    parameters.put("event_name", Event);
+                    parameters.put("value", "true3");
+                    parameters.put("event_name", Event1);
                     return parameters;
                 }
             };
@@ -173,18 +181,16 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
             StringRequest stringRequest=new StringRequest(Request.Method.POST, URL, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
+                    TempArr.clear();
 
-                        /*JSONObject jsonObject=new JSONObject(response);
-                        if(jsonObject.getInt("success")==1){
-                            JSONArray jsonArray=jsonObject.getJSONArray("Name");
-                            for(int i=0;i<jsonArray.length();i++){
-                                JSONObject jsonObject1=jsonArray.getJSONObject(i);
-                                String country=jsonObject1.getString("Country");
-                                CountryName.add(country);
-                            }*/
-                    Log.d("HAR", response);
+                    String[] temp = response.split(",");
+                    for(int i=0;i<temp.length;i++) {
+                        TempArr.add(temp[i]);
+                        Log.d("HAR", temp[i].toString());
+                    }
+                    s2.setAdapter(new ArrayAdapter<String>(ChoiceActivity.this, android.R.layout.simple_spinner_dropdown_item, TempArr));
+                    Progress.dismiss();
 
-                    // s1.setAdapter(new ArrayAdapter<String>(ChoiceActivity.this, android.R.layout.simple_spinner_dropdown_item, CountryName));
                 }
             }, new Response.ErrorListener() {
                 @Override
@@ -196,7 +202,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("value", "2");
+                    parameters.put("value", "true2");
                     parameters.put("city_name", city);
                     return parameters;
                 }
