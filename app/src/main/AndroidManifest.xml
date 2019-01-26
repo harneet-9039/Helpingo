@@ -41,7 +41,8 @@
         <activity
             android:name=".HomeScreen"
             android:label="HomeScreen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+             />
 
         <meta-data
             android:name="sendotp.key"
@@ -78,10 +79,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".SpotHelp"
             android:screenOrientation="portrait"/>
-        <activity android:name=".AddressListActivity"
-            android:screenOrientation="portrait"/>
-            android:screenOrientation="portrait"
-            android:theme="@style/LoginTheme" />
+
 
 
         <activity
