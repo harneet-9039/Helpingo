@@ -1,6 +1,6 @@
 package com.example.hp.helpingo;
 
-package a.dot7;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -8,7 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.widget.Button;
@@ -148,7 +148,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 dialogInterface.cancel();
-                                startActivity(new Intent(ForgotPassword.this,Register.class));
+                                startActivity(new Intent(ForgotPassword.this,MainActivity.class));
                             }
                         });
                         CustomDialog=builder.create();
@@ -161,7 +161,7 @@ public class ForgotPassword extends Activity implements View.OnClickListener{
                     progressBar.setVisibility(View.GONE);
                     Log.d("HAR", volleyError.toString());
                     Log.d("HAR", "Error");
-                    Toast.makeText(this,"Network Error", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(this,"Network Error", Toast.LENGTH_LONG).show();
                 }
             }) {
                 @Override

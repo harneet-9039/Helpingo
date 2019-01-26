@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         getDetails();
         try {
-            StringRequest request = new StringRequest(Request.Method.POST, "http://172.31.128.15/helpingo/check.php", new Response.
+            StringRequest request = new StringRequest(Request.Method.POST, "http://172.31.128.251/helpingo/public_signup.php", new Response.
                     Listener<String>() {
 
                 @Override
@@ -64,7 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("first_name", UserName);
+                    parameters.put("mobile", UserName);
+                    parameters.put("name", "gfgfgf");
+
                     return parameters;
                 }
             };
