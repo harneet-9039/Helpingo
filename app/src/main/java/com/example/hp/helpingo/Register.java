@@ -37,11 +37,10 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
 
     LinearLayout signup;
-    EditText UserName,UserContact,UserPassword,UserCPassword, UserEmail;
-    String name,contact,password,cpassword,Email;
-    String url = GlobalMethods.getURL() + "Login/CheckValidLogin";
-    int validContact=0,validCpass=0,empty=0,eName=0,eContact=0,ePass=0
-            ,eCpass=0, eEmail=0, validMail=0;
+    EditText UserName,UserContact;
+    String name,contact;
+    String url = GlobalMethods.getURL() + "public_signup.php";
+    int validContact=0,empty=0,eName=0,eContact=0;
     String StatusCode;
     ProgressBar progressBar;
 
@@ -89,26 +88,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
     private void focusChangeListeners()
     {
-        UserCPassword.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                //Log.d("HAR","Focus is changes "+hasFocus);
-                //if(hasFocus)
-                password=UserPassword.getText().toString();
-                cpassword=UserCPassword.getText().toString();
-                // Log.d("HAR","Focus changed to "+hasFocus+" Password:"+password+" cpass:"+cpassword );
-                if(!cpassword.equals(password))
-                {
-                    UserCPassword.setError("Passwords do not match");
-                    validCpass = 0;
-                }
-                else {
-                    validCpass = 1;
 
-                }
-                //}
-            }
-        });
         UserContact.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -126,22 +106,6 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 }
             }
         });
-        UserEmail.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus)
-                {
-                    Email = UserEmail.getText().toString();
-                    if(!Email.endsWith(".com")||!Email.contains("@"))
-                    {
-                        UserEmail.setError("Invalid Email Id");
-                        validMail = 0;
-                    }
-                    else
-                        validMail = 1;
-                }
-            }
-        });
 
     }
 
@@ -149,18 +113,13 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
         UserName.clearFocus();
         UserContact.clearFocus();
-        UserEmail.clearFocus();
-        UserCPassword.clearFocus();
-        UserPassword.clearFocus();
     }
 
     private void setDetails()
     {
         name=UserName.getText().toString();
         contact=UserContact.getText().toString();
-        password=UserPassword.getText().toString();
-        cpassword=UserCPassword.getText().toString();
-        Email = UserEmail.getText().toString();
+
 
         if(name.length()==0)
         {
@@ -168,42 +127,16 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
             eName = 0;
         }
         else eName = 1;
-        if(Email.length()==0)
-        {
-            UserEmail.setError("This field is required");
-            eEmail = 0;
-        }
-        else eEmail = 1;
-        if(password.length()==0)
-        {
-            UserPassword.setError("This field is required");
-            ePass = 0;
-        }
-        else if(password.length()<6)
-        {
-            UserPassword.setError("Minimum 6 characters required");
-            ePass = 0;
-        }
-        else ePass = 1;
+
         if(contact.length()==0)
         {
             UserContact.setError("This field is required");
             eContact = 0;
         }
         else eContact = 1;
-        if(cpassword.length()==0)
-        {
-            UserCPassword.setError("This field is required");
-            eCpass = 0;
-        }
-        else if(!cpassword.equals(password))
-        {
-            UserCPassword.setError("Passwords do not match");
-            eCpass = 0;
-        }
-        else eCpass = 1;
-        if(eName == 0 || eContact == 0 || ePass == 0 || eCpass == 0 ||
-                validContact == 0 || validCpass == 0 || eEmail == 0 || validMail == 0)
+
+        if(eName == 0 || eContact == 0  ||
+                validContact == 0)
         {
             empty = 1;
         }
@@ -242,11 +175,11 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 public void onResponse(String s) {
                     // progressBar.setActivated(false);
                     progressBar.setVisibility(View.GONE);
-                    StatusCode = GlobalMethods.GetSubString(s);
+
                     Log.d("HAR", s);
                     // ********************************************************stop progress bar*************************
 
-                    if (!StatusCode.contains("302")) {
+                    if (s.contains("1")) {
 
                         boolean flag;
                         //generating OTP
@@ -261,9 +194,7 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
 
                         Intent intent = new Intent(Register.this, OTP_Reader.class);
                         intent.putExtra("Name", name);
-                        intent.putExtra("Password", password);
                         intent.putExtra("Contact", contact);
-                        intent.putExtra("Email", Email);
                         intent.putExtra("OTP", OTP);
                         startActivity(intent);
                     } else {
@@ -291,7 +222,8 @@ public class Register extends AppCompatActivity implements View.OnClickListener 
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("LoginID", contact);
+                    parameters.put("mobile", contact);
+                    parameters.put("name", name);
 
                     // if(Name != null)
                     //   parameters.put("Name",Name);

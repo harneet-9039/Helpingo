@@ -41,11 +41,11 @@ public class OTP_Generator implements VerificationListener {
     {
         Verification Verify = SendOtpVerification.createSmsVerification(
                 SendOtpVerification
-                        .config("91"+Contact)  //specify the mobile number ID here
+                        .config(Contact)  //specify the mobile number ID here
                         .context(context)
                         .autoVerification(true)
                         .expiry("2")
-                        .senderId("DOTSMS")
+                        .senderId("SMSNEW")
                         .otp(OTP)
                         .otplength("4")
                         .build(),this);

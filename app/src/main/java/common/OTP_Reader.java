@@ -21,10 +21,10 @@ import com.example.hp.helpingo.MainActivity;
 import com.example.hp.helpingo.R;
 import com.example.hp.helpingo.Set_New_Password;
 
-import java.security.Permissions;
+
 import java.util.HashMap;
 import java.util.Map;
-
+import common.Permissions;
 
 
 
@@ -36,7 +36,7 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
     Context context = this;
     private String Name=null, Contact=null, Password=null, Email = null;
     String determine_activity=null;
-    String url = GlobalMethods.getURL() + "Register";
+    String url = GlobalMethods.getURL() + "public_signup.php";
     // String url = "http://192.168.43.161:3000/Register";
     boolean Flag = false;
     String StatusCode;
@@ -58,15 +58,13 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
         intent = getIntent();
         Name = intent.getStringExtra("Name");
         Contact = intent.getStringExtra("Contact");
-        Password = intent.getStringExtra("Password");
-        Email = intent.getStringExtra("Email");
         OTP = intent.getStringExtra("OTP");
         OTPTEXT = findViewById(R.id.Txt_Pin_Entry);
         if(Name == null && Password == null && Contact != null && OTP != null)
             determine_activity = "ForgotPassword";
         else
             determine_activity = "Register";
-       // Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,verify);
+       Permissions.getInstance(this).checkpermissions(this,REQUEST_ID_MULTIPLE_PERMISSIONS,verify);
         //read();
 
     }
@@ -135,16 +133,14 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                 @Override
                 public void onResponse(String s) {
                     verifyProgressBar.setVisibility(View.GONE);
-                    StatusCode = GlobalMethods.GetSubString(s);
+
                     Log.d("HAR", s);
                     if (StatusCode.contains("201")) {
                         SharedPreferences sharedPreferences =
                                 getSharedPreferences("logDetails", OTP_Reader.this.MODE_PRIVATE);
                         SharedPreferences.Editor editor=sharedPreferences.edit();
-                        editor.putString("Name",Name);
-                        editor.putString("Password",Password);
+
                         editor.putString("UserName",Contact);
-                        editor.putString("Email", Email);
                         editor.commit();
 
                         Log.d("HAR", "Local file created");
@@ -166,12 +162,8 @@ public class OTP_Reader extends AppCompatActivity implements View.OnClickListene
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> parameters = new HashMap<>();
-                    parameters.put("LoginID", Contact);
-                    parameters.put("password", Password);
-                    if (Name != null) {
-                        parameters.put("Name", Name);
-                        parameters.put("Email", Email);
-                    }
+                    parameters.put("mobile", Contact);
+                    parameters.put("name", Name);
                     return parameters;
                 }
             };

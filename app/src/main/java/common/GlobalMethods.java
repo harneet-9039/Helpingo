@@ -16,7 +16,7 @@ import com.android.volley.toolbox.StringRequest;
  */
 
 public class GlobalMethods {
-    static String URL = "http://dot7.com";
+    static String URL = "http://172.31.128.251/helpingo/";
     //static String URL = "http://192.168.43.137:3000/";
 
     public static String GetSubString(String res)
