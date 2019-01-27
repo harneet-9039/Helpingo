@@ -33,25 +33,22 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAUNObohVtbxseKCD5P0rZ9qfiqQPG5Uus"/>
+            android:value="AIzaSyB-vfetXFwV89tXmxUtK4yruP3w_bF-KYU" />
 
         <activity
             android:name=".MapsActivity"
-            android:label="Location"></activity>
+            android:label="Location" />
         <activity
             android:name=".HomeScreen"
             android:label="HomeScreen"
-            android:theme="@style/AppTheme.NoActionBar"
-             />
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="sendotp.key"
             android:value="@string/sendotp_key" />
 
+        <activity android:name=".ChoiceActivity"></activity>
 
-
-        <activity android:name=".ChoiceActivity">
-        </activity>
         <receiver android:name="common.SMSReciever">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -71,17 +68,17 @@
         </activity>
         <activity
             android:name=".Register"
-            android:theme="@style/LoginTheme"
-            android:screenOrientation="portrait"/>
-        <activity android:name="common.OTP_Reader"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ForgotPassword"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".SpotHelp"
-            android:screenOrientation="portrait"/>
-
-
-
+            android:screenOrientation="portrait"
+            android:theme="@style/LoginTheme" />
+        <activity
+            android:name="common.OTP_Reader"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ForgotPassword"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".SpotHelp"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Set_New_Password"
             android:screenOrientation="portrait"
@@ -89,6 +86,7 @@
         <activity
             android:name=".OTP"
             android:screenOrientation="portrait" />
+        
     </application>
 
 </manifest>

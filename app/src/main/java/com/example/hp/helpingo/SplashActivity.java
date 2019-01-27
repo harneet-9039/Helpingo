@@ -14,9 +14,7 @@ import common.GlobalMethods;
 public class SplashActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2000;
 
-    // String url = "172.31.143.34:3000//Login";
-    String StatusCode;
-    private String UserName,Password;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
