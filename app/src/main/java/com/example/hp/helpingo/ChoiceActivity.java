@@ -42,7 +42,7 @@ public class ChoiceActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_main);
         s1 = findViewById(R.id.spinner);
         s2 = findViewById(R.id.spinner2);
-        b = findViewById(R.id.button1);
+        b = findViewById(R.id.button);
         Progress = new ProgressDialog(this);
         b.setOnClickListener(this);
         s1.setOnItemSelectedListener(this);

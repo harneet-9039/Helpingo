@@ -10,6 +10,10 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -29,22 +33,24 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyAUNObohVtbxseKCD5P0rZ9qfiqQPG5Uus" />
+            android:value="AIzaSyAUNObohVtbxseKCD5P0rZ9qfiqQPG5Uus"/>
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="Location"></activity>
         <activity
             android:name=".HomeScreen"
-            android:label="@string/title_activity_home_screen"
+            android:label="HomeScreen"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data
             android:name="sendotp.key"
             android:value="@string/sendotp_key" />
 
-        <activity android:name=".MainActivity" />
 
+
+        <activity android:name=".ChoiceActivity">
+        </activity>
         <receiver android:name="common.SMSReciever">
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
@@ -64,14 +70,20 @@
         </activity>
         <activity
             android:name=".Register"
+            android:theme="@style/LoginTheme"
+            android:screenOrientation="portrait"/>
+        <activity android:name="common.OTP_Reader"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ForgotPassword"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SpotHelp"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".AddressListActivity"
+            android:screenOrientation="portrait"/>
             android:screenOrientation="portrait"
             android:theme="@style/LoginTheme" />
-        <activity
-            android:name="common.OTP_Reader"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ForgotPassword"
-            android:screenOrientation="portrait" />
+
+
         <activity
             android:name=".Set_New_Password"
             android:screenOrientation="portrait"
