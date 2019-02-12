@@ -1,4 +1,4 @@
-# Helpingo
+# Helpingo - HACK36 Project
 The idea of this project is taken from a very serious management problem.
 Due to delay in information retrieval of the mishap and proper action that will be taken by the management, a large amount of resources and people accidents happens.
 What we propose is a common people based surevellance system where people only will notify the management about the mishaps of any kind, such as fire, accidents, health problems, management problems etc.
